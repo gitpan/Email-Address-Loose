@@ -11,12 +11,12 @@ use vars qw[$VERSION $COMMENT_NEST_LEVEL $STRINGIFY
 
 my $NOCACHE;
 
-$VERSION              = '1.889';
+$VERSION              = '1.892';
 $COMMENT_NEST_LEVEL ||= 2;
 $STRINGIFY          ||= 'format';
 $COLLAPSE_SPACES      = 1 unless defined $COLLAPSE_SPACES; # who wants //=? me!
 
-#line 44
+#line 42
 
 my $CTL            = q{\x00-\x1F\x7F};
 my $special        = q{()<>\\[\\]:;@\\\\,."};
@@ -69,7 +69,7 @@ my $domain         = qr/$dot_atom|$domain_literal/;
 
 my $display_name   = $phrase;
 
-#line 135
+#line 133
 
 $addr_spec  = qr/$local_part\@$domain/;
 $angle_addr = qr/$cfws*<$addr_spec>$cfws*/;
@@ -82,7 +82,7 @@ sub _COMMENT  () { 2 }
 sub _ORIGINAL () { 3 }
 sub _IN_CACHE () { 4 }
 
-#line 178
+#line 176
 
 sub __get_cached_parse {
     return if $NOCACHE;
@@ -145,7 +145,7 @@ sub parse {
     return @addrs;
 }
 
-#line 254
+#line 252
 
 sub new {
   my ($class, $phrase, $email, $comment, $orig) = @_;
@@ -154,7 +154,7 @@ sub new {
   bless [ $phrase, $email, $comment, $orig ] => $class;
 }
 
-#line 276
+#line 274
 
 sub purge_cache {
     %NAME_CACHE   = ();
@@ -162,7 +162,7 @@ sub purge_cache {
     %PARSE_CACHE  = ();
 }
 
-#line 292
+#line 290
 
 sub disable_cache {
   my ($class) = @_;
@@ -174,7 +174,7 @@ sub enable_cache {
   $NOCACHE = undef;
 }
 
-#line 352
+#line 350
 
 BEGIN {
   my %_INDEX = (
@@ -206,7 +206,7 @@ BEGIN {
 sub host { ($_[0]->[_ADDRESS] =~ /\@($domain)/o)[0]     }
 sub user { ($_[0]->[_ADDRESS] =~ /($local_part)\@/o)[0] }
 
-#line 393
+#line 391
 
 sub format {
     local $^W = 0; ## no critic
@@ -248,7 +248,7 @@ sub _enquoted_phrase {
   return qq{"$phrase"};
 }
 
-#line 450
+#line 448
 
 sub name {
     local $^W = 0;
@@ -270,7 +270,7 @@ sub name {
     $NAME_CACHE{"@{$_[0]}"} = $name;
 }
 
-#line 498
+#line 496
 
 sub as_string {
   warn 'altering $Email::Address::STRINGIFY is deprecated; subclass instead'
@@ -281,11 +281,11 @@ sub as_string {
 
 use overload '""' => 'as_string';
 
-#line 513
+#line 511
 
 1;
 
 __END__
 
-#line 568
+#line 566
 
